@@ -10,8 +10,8 @@
 
 #define DEFAULT 0
 #define NUMBERS 1
-#define SYMBOLS 2
-#define NAVETC 3
+#define NAVETC 2
+#define SYMBOLS 3
 #define FUNCTIONS 4
 
 / {
@@ -20,7 +20,7 @@
                 compatible = "zmk,behavior-hold-tap";
                 label = "HOMEROW_MODS";
                 #binding-cells = <2>;
-                tapping_term_ms = <200>;
+                tapping_term_ms = <150>;
                 flavor = "tap-preferred";
                 bindings = <&kp>, <&kp>;
             };
@@ -90,36 +90,37 @@
                         >;
                 };
 
+                navetc_layer {
+// -------------------------------------------------------------------------
+// |      |      |       |       |       |   |    | home | pgup | next |      |  "  |
+// | lctl | lalt | lsft  | lgui  |       |   |    | left | down |  up  | rght |  |  |
+// |      |      |       |       |       |   |    | end  | pgdn | prev |      |  `  |
+//                       | trans | trans |   |    |      |
+                        bindings = <
+   &none     &none    &none     &none    &none       &none    &kp HOME &kp PG_UP &kp K_NEXT &kp DOUBLE_QUOTES
+   &kp LGUI &kp LALT &kp LCTRL &kp LSHFT &none       &kp LEFT &kp DOWN &kp UP    &kp RIGHT  &kp PIPE
+   &none     &none    &none     &none    &none       &none    &kp END  &kp PG_DN &kp K_PREV &kp GRAVE
+                                &trans  &trans          &trans  &trans
+                        >;
+
+                };
+
                 symbol_layer {
 // -------------------------------------------------------------------------
 // |   !  |   @  |   #   |   $   |   %   |   |  ^  |  &  |  *  |  (  |  )  |
-// | lctl | lalt | lsft  | lgui  |       |   |  -  |  =  |  {  |  }  |  |  |
+// | lctl | lalt | lsft  | lgui  |       |   |  -  |  =  |  {  |  }  |  '  |
 // |      |      |       |       |       |   |  _  |  +  |  [  |  ]  |  \  |
 //                       | trans | trans |   |  `  |  ~ |
 
                         bindings = <
    &kp EXCL  &kp AT    &kp HASH  &kp DLLR &kp PRCNT  &kp CARET  &kp AMPS  &kp ASTRK  &kp LPAR  &kp RPAR
-   &kp LGUI &kp LALT &kp LCTRL &kp LSHFT  &none      &kp MINUS  &kp EQUAL &kp LBRC   &kp RBRC  &kp PIPE
+   &kp LGUI &kp LALT &kp LCTRL &kp LSHFT  &none      &kp MINUS  &kp EQUAL &kp LBRC   &kp RBRC  &kp SINGLE_QUOTE
    &none     &none     &none     &none    &none      &kp UNDER  &kp PLUS  &kp LBKT   &kp RBKT  &kp BSLH
-                           &trans   &trans     &kp RPAR   &kp UNDER
+                           &trans   &trans     &kp GRAVE   &kp TILDE
 
                         >;
                 };
 
-                navetc_layer {
-// -------------------------------------------------------------------------
-// |      |      |       |       |       |   | home | pgup |      |      |     |
-// | lctl | lalt | lsft  | lgui  |       |   | left | down |  up  | rght |     |
-// |      |      |       |       |       |   | end  | pgdn |      |      |     |
-//                       | trans | trans |   |      |      |
-                        bindings = <
-   &none     &none    &none     &none    &none          &kp HOME &kp PG_UP &none  &none     &none
-   &kp LGUI &kp LALT &kp LCTRL &kp LSHFT &none          &kp LEFT &kp DOWN  &kp UP &kp RIGHT &none
-   &none     &none    &none     &none    &none          &kp END  &kp PG_DN &none  &none     &none
-                                &trans  &trans          &trans  &trans
-                        >;
-
-                };
 
                 function_layer {
 // -------------------------------------------------------------------------
